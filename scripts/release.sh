@@ -32,10 +32,10 @@ for _ in $(seq 1 30); do
 done
 npm view "no-as-a-library@$VERSION" version
 
-echo "▸ auto-chat 의존성을 레지스트리 버전으로 교체"
+echo "▸ auto-chat 의존성을 vendor tarball → 레지스트리 버전으로 교체"
 cd "$APP_DIR"
 npm pkg set "dependencies.no-as-a-library=^$VERSION"
-rm -rf node_modules/no-as-a-library
+rm -rf node_modules/no-as-a-library vendor
 npm install --no-audit --no-fund
 
 echo "▸ 라이브러리가 레지스트리에서 설치됐는지 확인"
