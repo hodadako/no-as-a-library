@@ -1,0 +1,69 @@
+{
+  "name": "no-as-a-library",
+  "version": "1.0.0",
+  "description": "한국어 거절 사유 1000개. 말투 5종(격식/정중/반말/직장인/드립)을 골라 뽑아 쓰는 라이브러리 + CLI + HTTP 서버.",
+  "keywords": [
+    "korean",
+    "korea",
+    "no",
+    "reject",
+    "rejection",
+    "excuse",
+    "decline",
+    "naas",
+    "no-as-a-service",
+    "거절",
+    "핑계"
+  ],
+  "license": "MIT",
+  "author": "hodadako",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hodadako/no-as-a-library.git"
+  },
+  "bugs": {
+    "url": "https://github.com/hodadako/no-as-a-library/issues"
+  },
+  "homepage": "https://github.com/hodadako/no-as-a-library#readme",
+  "type": "module",
+  "sideEffects": false,
+  "engines": {
+    "node": ">=18"
+  },
+  "bin": {
+    "no-as-a-library": "dist/cli.js"
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./types/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./types/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs",
+      "default": "./dist/index.js"
+    },
+    "./server": {
+      "types": "./types/server.d.ts",
+      "import": "./dist/server.js",
+      "require": "./dist/server.cjs",
+      "default": "./dist/server.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "types",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "node scripts/build.js",
+    "test": "node --test \"test/**/*.test.js\"",
+    "start": "node dist/cli.js --serve",
+    "prepublishOnly": "npm run build && npm test"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.0"
+  }
+}
