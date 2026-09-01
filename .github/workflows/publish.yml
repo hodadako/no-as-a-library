@@ -1,0 +1,36 @@
+name: publish
+
+# 로컬 npm 로그인 없이 배포하기 위한 경로.
+# Actions 탭에서 "Run workflow" 를 누르거나, v* 태그를 밀면 돈다.
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      # provenance(출처 증명) 서명을 위해 필요하다.
+      id-token: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          registry-url: https://registry.npmjs.org
+
+      - run: npm ci
+
+      - run: npm run build
+
+      - run: npm test
+
+      - name: npm publish
+        run: npm publish --access public --provenance
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

@@ -154,6 +154,24 @@ npm run build # esbuild → dist/ (ESM + CJS)
 
 런타임 의존성은 없습니다. `esbuild`만 devDependency입니다.
 
+## 배포
+
+두 가지 경로가 있습니다.
+
+**로컬에서** — `npm login` 후 아래 한 줄이면 배포부터 `auto-chat` 의존성 교체·재빌드까지 끝납니다.
+
+```bash
+bash scripts/release.sh
+```
+
+**GitHub Actions에서** — 로컬 로그인 없이 배포할 때. 저장소 시크릿에 npm Automation 토큰을
+`NPM_TOKEN`으로 넣어두고 Actions 탭에서 `publish` 워크플로를 돌리면 됩니다.
+
+```bash
+gh secret set NPM_TOKEN --repo hodadako/no-as-a-library
+gh workflow run publish --repo hodadako/no-as-a-library
+```
+
 ## 라이선스
 
 MIT
